@@ -1,0 +1,45 @@
+{
+    "com.badlogic.gdx.graphics.Color": {
+        "blue"   : { "r": 0.117647059, "g": 0.654901961, "b": 0.882352941 },
+        "green"  : { "r": 0.450980392, "g": 0.803921569, "b": 0.294117647 },
+        "gray"   : { "r": 0.933333333, "g": 0.933333333, "b": 0.933333333 },
+        "yellow" : { "r": 1.000000000, "g": 0.800000000, "b": 0.000000000 },
+        "red"    : { "r": 0.909803922, "g": 0.415686275, "b": 0.090196078 }
+    },
+
+    "com.badlogic.gdx.graphics.g2d.BitmapFont": {
+        "small": {
+            "file": "gradient_text.fnt",
+            "scaledSize": 20,
+            "flip": false,
+            "markupEnabled": false
+        },
+        "medium": {
+            "file": "gradient_text.fnt",
+            "scaledSize": 40,
+            "flip": false,
+            "markupEnabled": false
+        },
+        "large": {
+            "file": "gradient_text.fnt",
+            "scaledSize": 80,
+            "flip": false,
+            "markupEnabled": false
+        }
+    },
+
+    "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    	"score": {
+    	    "font": "small",
+    	    "fontColor": "yellow"
+    	},
+    	"life": {
+    	    "font": "small",
+    	    "fontColor": "red"
+    	},
+    	"notice": {
+    	    "font": "small",
+    	    "fontColor": "green"
+    	}
+    }
+}

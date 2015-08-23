@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name "sonatype-snapshots"
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name "sonatype-releases"
+            url "https://oss.sonatype.org/content/repositories/releases/"
+        }
+        jcenter()
+    }
+    dependencies {
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+    }
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+
+    version = '0.1.0'
+    sourceCompatibility = 1.7
+    ext {
+        appName = 'heaven'
+        gdxVersion = '1.6.5'
+        roboVMVersion = '1.6.0'
+        retinazerVersion = '0.1.2'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            name "sonatype-snapshots"
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            name "sonatype-releases"
+            url "https://oss.sonatype.org/content/repositories/releases/"
+        }
+        maven {
+            name "bintray-antag99-maven"
+            url "http://dl.bintray.com/antag99/maven"
+        }
+    }
+}
+
+project(":desktop") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+    }
+}
+
+project(":html") {
+    apply plugin: "gwt"
+    apply plugin: "war"
+
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+        compile "com.github.antag99.retinazer:retinazer-gwt:$retinazerVersion"
+        compile "com.github.antag99.retinazer:retinazer-gwt:$retinazerVersion:sources"
+        compile "com.github.antag99.retinazer:retinazer:$retinazerVersion:sources"
+    }
+}
+
+project(":core") {
+    apply plugin: "java"
+
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.github.antag99.retinazer:retinazer:$retinazerVersion"
+    }
+}
+
+tasks.eclipse.doLast {
+    delete ".project"
+}

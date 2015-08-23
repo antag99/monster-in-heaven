@@ -1,0 +1,67 @@
+{
+"skeleton": { "hash": "NDiPKntHX/Fns0AGRD9H1ZFgDuM", "spine": "2.1.27", "width": 165.52, "height": 286.34, "images": "./images/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "body", "parent": "root", "length": 182.16, "x": 44.63, "y": 4.01, "rotation": 88.64 },
+	{ "name": "head", "parent": "body", "length": 100.27, "x": 169.82, "y": 1.16, "rotation": 0.9 },
+	{ "name": "weapon", "parent": "body", "length": 115.92, "x": 127.17, "y": -35.79, "rotation": -24.54 }
+],
+"slots": [
+	{ "name": "body", "bone": "body", "attachment": "body" },
+	{ "name": "head", "bone": "head", "attachment": "head" },
+	{ "name": "weapon", "bone": "weapon", "attachment": "weapon" }
+],
+"skins": {
+	"default": {
+		"body": {
+			"body": { "x": 84.58, "y": -0.31, "rotation": -88.64, "width": 93, "height": 178 }
+		},
+		"head": {
+			"head": { "x": 54.54, "y": 6.2, "rotation": -89.54, "width": 118, "height": 115 }
+		},
+		"weapon": {
+			"weapon": { "x": 2.73, "y": -0.22, "rotation": -89.43, "width": 30, "height": 233 }
+		}
+	}
+},
+"animations": {
+	"attack": {
+		"bones": {
+			"weapon": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.1666, "angle": -43.55 },
+					{ "time": 0.3333, "angle": -59.15 },
+					{ "time": 0.5, "angle": -43.55 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1666, "x": -13.66, "y": 28.45 },
+					{ "time": 0.3333, "x": -11.15, "y": -78.23 },
+					{ "time": 0.5, "x": -13.66, "y": 28.45 },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				]
+			}
+		}
+	},
+	"walk": {
+		"bones": {
+			"body": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1666, "x": 0, "y": 10.79 },
+					{ "time": 0.3333, "x": 0, "y": 0 }
+				]
+			},
+			"weapon": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.1666, "angle": -6.04 },
+					{ "time": 0.3333, "angle": 0 }
+				]
+			}
+		}
+	}
+}
+}
