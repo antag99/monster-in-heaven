@@ -8,9 +8,12 @@
 	<entry-point class='com.github.antag99.heaven.client.HtmlLauncher' />
 	
 	<set-configuration-property name="gdx.assetpath" value="../core/assets" />
-    <extend-configuration-property name="gdx.reflect.include" value="com.badlogic.gdx.g2d"/>
+    <extend-configuration-property name="gdx.reflect.include" value="com.badlogic.gdx.graphics.g2d.ParticleEffect"/>
+    <extend-configuration-property name="gdx.reflect.include" value="com.badlogic.gdx.audio.Sound"/>
     <extend-configuration-property name="gdx.reflect.include" value="com.github.antag99.heaven"/>
     <extend-configuration-property name="gdx.reflect.include" value="com.github.antag99.heaven.system"/>
     <extend-configuration-property name="gdx.reflect.include" value="com.github.antag99.heaven.component"/>
     <extend-configuration-property name="gdx.reflect.include" value="com.github.antag99.heaven.util"/>
+    <extend-configuration-property name="gdx.reflect.include" value="com.esotericsoftware.spine"/>
+    <extend-configuration-property name="gdx.reflect.include" value="com.esotericsoftware.spine.attachments"/>
 </module>

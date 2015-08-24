@@ -42,7 +42,7 @@ public abstract class HeavenScreen implements Screen {
         this.inputMultiplexer.addProcessor(uiStage);
         this.skin = new Skin(Gdx.files.internal("skin.json"));
         // Images such as "tooth_0", "tooth_1" are handled specially by TextureAtlas; revert this.
-        for (AtlasRegion region : this.skin.getAtlas().getRegions().<AtlasRegion> toArray(AtlasRegion.class)) {
+        for (AtlasRegion region : this.skin.getAtlas().getRegions()) {
             if (region.index != -1) {
                 this.skin.getAtlas().addRegion(region.name + "_" + region.index, region);
             }

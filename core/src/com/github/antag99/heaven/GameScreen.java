@@ -7,22 +7,14 @@ import static com.github.antag99.heaven.component.Collision.FLAG_WALL;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.spine.AnimationState;
-import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.Skeleton;
-import com.esotericsoftware.spine.SkeletonData;
-import com.esotericsoftware.spine.SkeletonJson;
-import com.esotericsoftware.spine.Skin;
-import com.esotericsoftware.spine.attachments.AtlasAttachmentLoader;
-import com.esotericsoftware.spine.attachments.RegionAttachment;
 import com.github.antag99.heaven.component.Acting;
 import com.github.antag99.heaven.component.Attack;
 import com.github.antag99.heaven.component.CakeSpawner;
@@ -139,8 +131,6 @@ public final class GameScreen extends HeavenScreen {
     private Handle rightMonsterSpawner;
     private Handle cakeSpawner;
     private Mapper<Player> mPlayer;
-    private SkeletonData playerSkeletonData;
-    private AnimationStateData playerAnimationStateData;
 
     private float time = 0f;
     private boolean isCake = false;
@@ -163,27 +153,6 @@ public final class GameScreen extends HeavenScreen {
         labelTable.add(lifeLabel).width(200f).left().padRight(2f).padTop(2f).row();
         table.add(labelTable).expandX().right().top().row();
         table.add(noticeLabel).expandX().expandY().center().row();
-
-        playerSkeletonData = new SkeletonJson(new AtlasAttachmentLoader(skin.getAtlas()) {
-            @Override
-            public RegionAttachment newRegionAttachment(Skin skin, String name, String path) {
-                return super.newRegionAttachment(skin, name, "player/images/" + path);
-            }
-        }) {
-            {
-                setScale(1f / pixelsPerMeter * 0.4f);
-            }
-
-            @Override
-            public SkeletonData readSkeletonData(FileHandle file) {
-                SkeletonData skeletonData = super.readSkeletonData(file);
-                if (skeletonData.getBones().size > 0) {
-                    skeletonData.getBones().get(0).setPosition(PLAYER_WIDTH * 0.3f, 0f);
-                }
-                return skeletonData;
-            }
-        }.readSkeletonData(Gdx.files.internal("player/player.json"));
-        playerAnimationStateData = new AnimationStateData(playerSkeletonData);
     }
 
     @Override
@@ -191,7 +160,6 @@ public final class GameScreen extends HeavenScreen {
         return super.initialize()
                 .addWireResolver(new DependencyResolver(new DependencyConfig()
                         .addDependency(skin)
-                        .addDependency(Batch.class, batch)
                         .addDependency(this)))
                 .addSystem(new AssetSystem())
                 .addSystem(new KeyboardSystem())
@@ -402,8 +370,10 @@ public final class GameScreen extends HeavenScreen {
         this.rightMonsterSpawner = rightMonsterSpawnerEntity.duplicate();
 
         // Create the player
-        SpineActor player = new SpineActor(new Skeleton(playerSkeletonData),
-                new AnimationState(playerAnimationStateData));
+        SpineActor player = new SpineActor(new Skeleton(assetSystem.playerSkeletonData),
+                new AnimationState(assetSystem.playerAnimationStateData));
+        player.skeleton.setSkin("default");
+        player.animationState.addAnimation(0, "idle", true, 0f);
         // player.debug();
         Handle playerEntity = engine.createEntity();
         playerEntity.create(Acting.class).actor(player);

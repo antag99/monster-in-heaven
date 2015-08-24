@@ -45,17 +45,16 @@ public final class PlayerSystem extends EntityProcessorSystem {
         SpineActor actor = (SpineActor) acting.actor;
         AnimationState animationState = actor.animationState;
 
-        if (animationState.getCurrent(0) == null) {
+        if (animationState.getCurrent(1) == null) {
             if (velocity.x != 0f) {
-                animationState.addAnimation(0, "walk", false, 0f).setTimeScale(Math.abs(velocity.x * 0.4f));
+                animationState.addAnimation(1, "walk", false, 0f).setTimeScale(Math.abs(velocity.x * 0.4f));
             } else {
-                animationState.addAnimation(0, "idle", false, 0f);
+                animationState.addAnimation(1, "idle", false, 0f);
             }
         }
 
-        if (attack.counter > 0f && animationState.getCurrent(1) == null) {
-            // Timescale is deep magic. Change it if you alter the player attack delay/spine animation.
-            TrackEntry track = animationState.addAnimation(1, "bite", false, 0f);
+        if (attack.counter > 0f && animationState.getCurrent(2) == null) {
+            TrackEntry track = animationState.addAnimation(2, "bite", false, 0f);
             track.setTimeScale(track.getEndTime() / attack.delay);
         }
 

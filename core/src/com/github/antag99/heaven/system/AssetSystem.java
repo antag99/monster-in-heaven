@@ -22,6 +22,8 @@ public final class AssetSystem extends EntitySystem {
     public Sound tridentSound;
     public SkeletonData fairySkeletonData;
     public AnimationStateData fairyAnimationStateData;
+    public SkeletonData playerSkeletonData;
+    public AnimationStateData playerAnimationStateData;
     public ParticleEffect fairyDie;
     public ParticleEffect hellFairyDie;
     public ParticleEffect devilDie;
@@ -71,6 +73,18 @@ public final class AssetSystem extends EntitySystem {
             }
         }.readSkeletonData(Gdx.files.internal("fairy/fairy.json"));
         this.fairyAnimationStateData = new AnimationStateData(fairySkeletonData);
+
+        playerSkeletonData = new SkeletonJson(new AtlasAttachmentLoader(skin.getAtlas()) {
+            @Override
+            public RegionAttachment newRegionAttachment(com.esotericsoftware.spine.Skin skin, String name, String path) {
+                return super.newRegionAttachment(skin, name, "player/images/" + path);
+            }
+        }) {
+            {
+                setScale(1f / 16f * 0.4f); // XXX: Duplicated constant
+            }
+        }.readSkeletonData(Gdx.files.internal("player/player.json"));
+        playerAnimationStateData = new AnimationStateData(playerSkeletonData);
 
         fairyDie = new ParticleEffect();
         fairyDie.load(Gdx.files.internal("fairy_die.txt"), skin.getAtlas());

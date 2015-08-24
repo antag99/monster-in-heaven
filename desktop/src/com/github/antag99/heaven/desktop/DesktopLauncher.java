@@ -19,8 +19,8 @@ public class DesktopLauncher {
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Monster In Heaven";
-        cfg.width = 800;
-        cfg.height = 600;
+        cfg.width = 1280;
+        cfg.height = 720;
         new LwjglApplication(new HeavenGame(), cfg);
     }
 }

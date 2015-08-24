@@ -29,7 +29,7 @@ public final class CollisionSystem extends EntitySystem {
     }
 
     private Array<CollisionListenerRegistration> collisionListeners =
-            new Array<CollisionListenerRegistration>(CollisionListenerRegistration.class);
+            new Array<CollisionListenerRegistration>();
 
     public void addCollisionListener(int iProperties, int jProperties, CollisionListener listener) {
         CollisionListenerRegistration registration = new CollisionListenerRegistration();
@@ -84,15 +84,15 @@ public final class CollisionSystem extends EntitySystem {
                     float jH = jSize.height;
 
                     if (iX + iW > jX && iY + iH > jY && jX + jW > iX && jY + jH > iY) {
-                        CollisionListenerRegistration[] listeners = collisionListeners.items;
+                        Object[] listeners = collisionListeners.items;
                         for (int ii = 0, nn = collisionListeners.size; ii < nn; ii++) {
-                            CollisionListenerRegistration listener = listeners[ii];
+                            CollisionListenerRegistration listener = (CollisionListenerRegistration) listeners[ii];
                             if ((listener.iProperties & iCollision.properties) != 0 &&
                                     (listener.jProperties & jCollision.properties) != 0) {
-                                listeners[ii].listener.onCollision(items[i], items[j]);
+                                listener.listener.onCollision(items[i], items[j]);
                             } else if ((listener.iProperties & jCollision.properties) != 0 &&
                                     (listener.jProperties & iCollision.properties) != 0) {
-                                listeners[ii].listener.onCollision(items[j], items[i]);
+                                listener.listener.onCollision(items[j], items[i]);
                             }
                         }
                     }
