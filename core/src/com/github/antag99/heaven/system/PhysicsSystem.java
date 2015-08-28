@@ -3,7 +3,6 @@ package com.github.antag99.heaven.system;
 import static com.github.antag99.heaven.component.Collision.FLAG_FLOOR;
 import static com.github.antag99.heaven.component.Collision.FLAG_WALL;
 
-import com.badlogic.gdx.Gdx;
 import com.github.antag99.heaven.component.Collision;
 import com.github.antag99.heaven.component.Position;
 import com.github.antag99.heaven.component.Size;
@@ -18,6 +17,7 @@ import com.github.antag99.retinazer.Wire.Ignore;
 @Wire
 public final class PhysicsSystem extends EntityProcessorSystem {
     private CollisionSystem collisionSystem;
+    private DeltaSystem deltaSystem;
     private Mapper<Position> mPosition;
     private Mapper<Velocity> mVelocity;
     private Mapper<Collision> mCollision;
@@ -85,7 +85,7 @@ public final class PhysicsSystem extends EntityProcessorSystem {
     private @Ignore CollisionListener collisionListener = new CollisionListener() {
         @Override
         public void onCollision(int i, int j) {
-            float deltaTime = Gdx.graphics.getDeltaTime();
+            float deltaTime = deltaSystem.getDeltaTime();
 
             Position iPosition = mPosition.get(i);
             Size iSize = mSize.get(i);
@@ -115,7 +115,7 @@ public final class PhysicsSystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
 
         Position position = mPosition.get(entity);
         Velocity velocity = mVelocity.get(entity);

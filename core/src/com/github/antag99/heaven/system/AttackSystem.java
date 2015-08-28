@@ -9,6 +9,7 @@ import com.github.antag99.retinazer.Wire;
 
 @Wire
 public final class AttackSystem extends EntityProcessorSystem {
+    private DeltaSystem deltaSystem;
     private Mapper<Attack> mAttack;
 
     @SuppressWarnings("unchecked")
@@ -18,7 +19,7 @@ public final class AttackSystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
         Attack attack = mAttack.get(entity);
         attack.hit = false;
         attack.hot = false;

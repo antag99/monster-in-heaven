@@ -7,7 +7,6 @@ import static com.github.antag99.heaven.component.Collision.FLAG_CAKE;
 import static com.github.antag99.heaven.component.Collision.FLAG_FLOOR;
 import static com.github.antag99.heaven.component.Collision.FLAG_PLAYER;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -39,6 +38,7 @@ public final class CakeSpawnerSystem extends EntityProcessorSystem {
 
     private Engine engine;
     private AssetSystem assetSystem;
+    private DeltaSystem deltaSystem;
     private Mapper<CakeSpawner> mCakeSpawner;
     private Mapper<Position> mPosition;
     private Mapper<Size> mSize;
@@ -50,7 +50,7 @@ public final class CakeSpawnerSystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
         CakeSpawner cakeSpawner = mCakeSpawner.get(entity);
         Position position = mPosition.get(entity);
         Size size = mSize.get(entity);

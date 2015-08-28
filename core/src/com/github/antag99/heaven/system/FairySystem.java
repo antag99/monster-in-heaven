@@ -1,6 +1,5 @@
 package com.github.antag99.heaven.system;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
@@ -37,6 +36,7 @@ public final class FairySystem extends EntityProcessorSystem {
     private Mapper<Velocity> mVelocity;
     private GameScreen gameScreen;
     private AssetSystem assetSystem;
+    private DeltaSystem deltaSystem;
 
     private @Ignore EntitySet players;
     private @Ignore Vector2 vTmp = new Vector2();
@@ -74,7 +74,7 @@ public final class FairySystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
         Fairy fairy = mFairy.get(entity);
         Position position = mPosition.get(entity);
         Velocity velocity = mVelocity.get(entity);

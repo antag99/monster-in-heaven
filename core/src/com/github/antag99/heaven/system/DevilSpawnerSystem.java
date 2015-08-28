@@ -4,7 +4,6 @@ import static com.github.antag99.heaven.component.Collision.FLAG_FLOOR;
 import static com.github.antag99.heaven.component.Collision.FLAG_MONSTER;
 import static com.github.antag99.heaven.component.Collision.FLAG_PLAYER;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
@@ -38,6 +37,7 @@ public final class DevilSpawnerSystem extends EntityProcessorSystem {
     private Engine engine;
     private AssetSystem assetSystem;
     private CollisionSystem collisionSystem;
+    private DeltaSystem deltaSystem;
     private Mapper<DevilSpawner> mDevilSpawner;
     private Mapper<Position> mPosition;
     private Mapper<Size> mSize;
@@ -73,7 +73,7 @@ public final class DevilSpawnerSystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
         DevilSpawner devilSpawner = mDevilSpawner.get(entity);
         Position position = mPosition.get(entity);
         Size size = mSize.get(entity);

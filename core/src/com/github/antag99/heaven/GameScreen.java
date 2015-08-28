@@ -41,6 +41,7 @@ import com.github.antag99.heaven.system.CakeSpawnerSystem;
 import com.github.antag99.heaven.system.CakeSystem;
 import com.github.antag99.heaven.system.ClearSystem;
 import com.github.antag99.heaven.system.CollisionSystem;
+import com.github.antag99.heaven.system.DeltaSystem;
 import com.github.antag99.heaven.system.DevilSpawnerSystem;
 import com.github.antag99.heaven.system.DevilSystem;
 import com.github.antag99.heaven.system.DirectionSystem;
@@ -119,6 +120,7 @@ public final class GameScreen extends HeavenScreen {
     private static final float MONSTER_DURATION = 20f;
 
     private AssetSystem assetSystem;
+    private DeltaSystem deltaSystem;
     private Label scoreLabel;
     private Label lifeLabel;
     private Label noticeLabel;
@@ -161,6 +163,7 @@ public final class GameScreen extends HeavenScreen {
                 .addWireResolver(new DependencyResolver(new DependencyConfig()
                         .addDependency(skin)
                         .addDependency(this)))
+                .addSystem(new DeltaSystem())
                 .addSystem(new AssetSystem())
                 .addSystem(new KeyboardSystem())
                 .addSystem(new MovementControlSystem())
@@ -196,7 +199,7 @@ public final class GameScreen extends HeavenScreen {
 
     @Override
     public void render(float delta) {
-        super.render(delta);
+        super.render(delta = deltaSystem.getDeltaTime());
 
         if (!isStarted) {
             noticeLabel.setText("You're a monster in heaven.\n"

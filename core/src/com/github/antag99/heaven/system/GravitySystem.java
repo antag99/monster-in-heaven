@@ -1,8 +1,7 @@
 package com.github.antag99.heaven.system;
 
-import com.badlogic.gdx.Gdx;
-import com.github.antag99.heaven.component.Weight;
 import com.github.antag99.heaven.component.Velocity;
+import com.github.antag99.heaven.component.Weight;
 import com.github.antag99.retinazer.EntityProcessorSystem;
 import com.github.antag99.retinazer.Family;
 import com.github.antag99.retinazer.Mapper;
@@ -10,6 +9,7 @@ import com.github.antag99.retinazer.Wire;
 
 @Wire
 public final class GravitySystem extends EntityProcessorSystem {
+    private DeltaSystem deltaSystem;
     private Mapper<Velocity> mVelocity;
     private Mapper<Weight> mWeight;
     private float gravity;
@@ -24,7 +24,7 @@ public final class GravitySystem extends EntityProcessorSystem {
 
     @Override
     protected void process(int entity) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+        float deltaTime = deltaSystem.getDeltaTime();
         Velocity velocity = mVelocity.get(entity);
         Weight weight = mWeight.get(entity);
 
