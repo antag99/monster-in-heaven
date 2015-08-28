@@ -4,7 +4,16 @@ sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
-
+sourceSets.main.resources.srcDirs = [ "assets/" ]
+sourceSets.main.resources {
+    include "**/skin*.png"
+    include "**/*.json"
+    include "**/*.atlas"
+    include "**/*.fnt"
+    include "**/*.txt"
+    include "**/*.ogg"
+    include "**/*.wav"
+}
 
 eclipse.project {
     name = appName + "-core"
